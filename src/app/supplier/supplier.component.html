@@ -1,0 +1,52 @@
+<div class="container">
+  <h2>Fornecedores</h2>
+  <form (ngSubmit)="onSubmit()" #supplierForm="ngForm">
+    <div class="form-group">
+      <label for="name">Nome:</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="supplier.name" name="name">
+    </div>
+    <div class="form-group">
+      <label for="active">Ativo:</label>
+      <input type="checkbox" id="active" [(ngModel)]="supplier.active" name="active">
+    </div>
+    <div class="form-group">
+      <label for="category">Categoria:</label>
+      <select class="form-control" id="category" required [(ngModel)]="supplier.category" name="category">
+        <option value="regional">Regional</option>
+        <option value="nacional">Nacional</option>
+        <option value="internacional">Internacional</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="contact">Contato:</label>
+      <input type="text" class="form-control" id="contact" [(ngModel)]="supplier.contact" name="contact">
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </form>
+
+  <hr>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Ativo</th>
+        <th>Categoria</th>
+        <th>Contato</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let supplier of suppliers">
+        <td>{{ supplier.name }}</td>
+        <td>{{ supplier.active ? 'Sim' : 'Não' }}</td>
+        <td>{{ supplier.category }}</td>
+        <td>{{ supplier.contact }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="editSupplier(supplier)">Editar</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteSupplier(supplier)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
