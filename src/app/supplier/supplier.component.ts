@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Supplier } from './supplier.interface';
 import { HttpClient } from '@angular/common/http';
-
-interface Supplier {
-  id: number;
-  name: string;
-  active: boolean;
-  category: string;
-  contact: string;
-}
 
 @Component({
   selector: 'app-supplier',
@@ -29,14 +22,13 @@ export class SupplierComponent implements OnInit {
 
   ngOnInit() {
     this.getSuppliers();
-  }
 
+  }
   getSuppliers() {
-    this.http.get<any>('http://localhost:3000/suppliers').subscribe(data => {
+    this.http.get<Supplier[]>('http://localhost:3000/suppliers').subscribe(data => {
       this.suppliers = data;
     });
   }
-
   onSubmit() {
     if (this.supplier.id === 0) {
       this.http.post<any>('http://localhost:3000/suppliers', this.supplier).subscribe(() => {
